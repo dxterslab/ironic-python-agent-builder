@@ -9,6 +9,9 @@ set -o pipefail
 DIB_IPA_ENABLE_RESCUE=${DIB_IPA_ENABLE_RESCUE:-true}
 DIB_IPA_ENABLE_SYSTEMD_NETWORKD=${DIB_IPA_ENABLE_SYSTEMD_NETWORKD:-true}
 
+###Change code on raid_utils.py
+sed -i -e 's/\(volume_name = \)md_device/\1 \"md0\"/' /opt/ironic-python-agent/lib/python3.9/site-packages/ironic_python_agent/raid_utils.py
+
 if $DIB_IPA_ENABLE_RESCUE; then
     # Make sure rescue works
     mkdir -p /etc/ipa-rescue-config
